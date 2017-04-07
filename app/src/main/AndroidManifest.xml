@@ -3,6 +3,7 @@
     package="com.vehicleapp.mac.user.weatherapp">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -21,6 +22,9 @@
 
         <service
             android:name=".process.WeatherManagerService"
+            android:exported="false" />
+        <service
+            android:name=".process.shared_preferences.LocationPersister"
             android:exported="false"></service>
     </application>
 

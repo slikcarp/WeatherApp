@@ -8,9 +8,19 @@ import android.content.Context;
 
 public interface WeatherPresenterIntr {
 
+    void createGooglePlayServicesInstance();
+
     void loadWeather();
 
     void registerAlarm(Context context);
 
     void unregisterAlarm(Context context);
+
+    void connectGooglePlayServices();
+
+    void disconnectGooglePlayServices();
+
+    void registerEvenBus();
+
+    void unregisterEventBus();
 }

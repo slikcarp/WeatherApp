@@ -1,11 +1,12 @@
 package com.vehicleapp.mac.user.weatherapp.main_weather.ui;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.vehicleapp.mac.user.weatherapp.R;
 import com.vehicleapp.mac.user.weatherapp.main_weather.WeatherContract;
+import com.vehicleapp.mac.user.weatherapp.main_weather.di.DaggerWeatherComponent;
 import com.vehicleapp.mac.user.weatherapp.main_weather.di.WeatherModule;
 import com.vehicleapp.mac.user.weatherapp.model.WeatherReport;
 
@@ -22,26 +23,39 @@ public class WeatherActivity extends AppCompatActivity implements WeatherContrac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
 
-//        DaggerWeatherComponent.builder()
-//                .weatherModule(new WeatherModule(this, this))
-//                .build().inject(this);
+        DaggerWeatherComponent.builder()
+                .weatherModule(new WeatherModule(this, this))
+                .build().inject(this);
+
+        presenter.createGooglePlayServicesInstance();
 
         temperatureView = (TextView) findViewById(R.id.temperatureView);
     }
 
     @Override
     protected void onStart() {
-        super.onStart();
+        presenter.connectGooglePlayServices();
 
-        presenter.loadWeather();
+        presenter.registerEvenBus();
         presenter.registerAlarm(this);
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.loadWeather();
     }
 
     @Override
     protected void onStop() {
-        super.onStop();
-
         presenter.unregisterAlarm(this);
+        presenter.unregisterEventBus();
+
+        presenter.disconnectGooglePlayServices();
+
+        super.onStop();
     }
 
     @Override

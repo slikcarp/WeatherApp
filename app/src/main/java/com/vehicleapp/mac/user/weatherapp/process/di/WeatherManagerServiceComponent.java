@@ -1,14 +1,13 @@
-package com.vehicleapp.mac.user.weatherapp.process.alarm.di;
+package com.vehicleapp.mac.user.weatherapp.process.di;
 
 import com.vehicleapp.mac.user.weatherapp.process.WeatherManagerService;
-import com.vehicleapp.mac.user.weatherapp.process.di.WeatherManagerServiceModule;
 
 import dagger.Component;
 
 /**
- * Created by user on 2017-04-06.
+ * Created by user on 2017-04-07.
  */
 @Component(modules = WeatherManagerServiceModule.class)
-public interface AlarmComponent {
+public interface WeatherManagerServiceComponent {
     void inject(WeatherManagerService weatherManagerService);
 }

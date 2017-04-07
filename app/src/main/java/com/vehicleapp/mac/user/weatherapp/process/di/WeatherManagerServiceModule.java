@@ -2,6 +2,8 @@ package com.vehicleapp.mac.user.weatherapp.process.di;
 
 import com.vehicleapp.mac.user.weatherapp.process.alarm.Alarm;
 import com.vehicleapp.mac.user.weatherapp.process.alarm.AlarmIntr;
+import com.vehicleapp.mac.user.weatherapp.process.shared_preferences.SharedPreferences;
+import com.vehicleapp.mac.user.weatherapp.process.shared_preferences.SharedPreferencesIntr;
 import com.vehicleapp.mac.user.weatherapp.process.weather_retriever.WeatherRetrieverService;
 import com.vehicleapp.mac.user.weatherapp.process.weather_retriever.WeatherRetrieverServiceIntr;
 
@@ -26,5 +28,11 @@ public class WeatherManagerServiceModule {
     @Named("weatherRetrieverService")
     public WeatherRetrieverServiceIntr provideWeatherRetrieverHandler() {
         return new WeatherRetrieverService();
+    }
+
+    @Provides
+    @Named("sharedPreferences")
+    public SharedPreferencesIntr provideSharedPreferences() {
+        return new SharedPreferences();
     }
 }

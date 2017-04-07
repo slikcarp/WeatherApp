@@ -2,11 +2,9 @@ package com.vehicleapp.mac.user.weatherapp.process.weather_retriever;
 
 import com.vehicleapp.mac.user.weatherapp.model.WeatherReport;
 
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by user on 2017-04-06.
@@ -14,6 +12,6 @@ import retrofit2.http.Path;
 
 public interface WeatherRetrieverIntr {
 
-    @GET("data/2.5/weather?lat={lat}&lon={lon}")
-    Call<List<WeatherReport>> requestWeatherByLocation(@Path("lat") String location, @Path("lon") String longitud);
+    @GET("data/2.5/weather")
+    Call<WeatherReport> requestWeatherByLocation(@Query("lat") String latitude, @Query("lon") String longitude, @Query("appid") String appid);
 }
